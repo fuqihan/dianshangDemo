@@ -1,9 +1,10 @@
 <template>
   <div class="search-option">
-    <table>
+    <div class="search-option-crumbs"></div>
+    <table border="0" cellpadding="0" cellspacing="0">
       <tr v-for="option in optionList">
-        <td width="80">品牌:</td>
-        <td><span v-for="item in option">{{item}}</span></td>
+        <td class="op-list-1">品牌：</td>
+        <td class="op-list-2"><span v-for="item in option">{{item}}</span></td>
       </tr>
     </table>
   </div>
@@ -11,7 +12,7 @@
 
 <script>
   const optionList = {
-    1: ['家居', '家具', '家装', '厨具', '家具', '家装', '厨具'],
+    1: ['家居', '家具', '家装', '厨具', '家具', '家装', '厨具', '家具', '家装', '厨具', '家具', '家装', '厨具'],
     2: ['手机', '运营商', '数码'],
     3: ['电脑', '办公'],
     4: ['男装', '女装', '童装', '内衣'],
@@ -34,12 +35,25 @@
 <style lang="less">
   .search-option {
     margin: 0;
+    border: 0;
     table {
       width: 90%;
-      margin: 0 auto;
+      margin-left: 89px;
       tr {
-        td {
+       .op-list-1 {
+         width: 100px;
+         background: #8c939d;
+         text-align: center;
 
+       }
+        .op-list-2 {
+          display: flex;
+          flex-wrap: wrap;
+          margin-bottom: 10px;
+          span {
+            width: 100px;
+            text-align: center;
+          }
         }
       }
     }

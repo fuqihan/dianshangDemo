@@ -10,6 +10,8 @@ const loginTab1 = r => require.ensure([], () => r(require('../page/login/childre
 const loginTab2 = r => require.ensure([], () => r(require('../page/login/children/loginTab2.vue')), 'login')
 const register = r => require.ensure([], () => r(require('../page/register/register.vue')), 'register')
 const search = r => require.ensure([], () => r(require('../page/search/search.vue')), 'search')
+const shopShow = r => require.ensure([], () => r(require('../page/shopShow/shopShow.vue')), 'shopShow')
+const shopCart = r => require.ensure([], () => r(require('../page/shopCart/shopCart.vue')), 'shopCart')
 Vue.use(Router)
 
 const routes = [
@@ -35,6 +37,16 @@ const routes = [
         path: '/search',
         name: 'search',
         component: search
+      },
+      {
+        path: '/shopShow',
+        name: 'shopShow',
+        component: shopShow
+      },
+      {
+        path: '/shopCart',
+        name: 'shopCart',
+        component: shopCart
       }
     ]
   },

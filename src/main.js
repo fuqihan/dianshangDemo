@@ -7,10 +7,12 @@ import axios from 'axios'
 import store from './store'
 import VueAxios from 'vue-axios'
 import ElementUI from 'element-ui'
+import VueVideoPlayer from 'vue-video-player'
 import 'element-ui/lib/theme-default/index.css'
 
 Vue.use(VueAxios, axios)
 Vue.use(ElementUI)
+Vue.use(VueVideoPlayer)
 
 Vue.config.productionTip = false
 

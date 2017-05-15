@@ -15,7 +15,7 @@
           <router-link :to="{name: 'index'}"><i class="iconfont icon-wodedingdan"
                                                 style="font-size: 10px; margin-right: 5px"></i>我的订单
           </router-link>
-          <router-link :to="{name: 'index'}"><i class="iconfont icon-gouwuchekong"
+          <router-link :to="{name: 'shopCart'}"><i class="iconfont icon-gouwuchekong"
                                                 style="font-size: 12px; margin-right: 5px; color: red"></i>购物车
           </router-link>
           <router-link :to="{name: 'index'}">客户服务</router-link>

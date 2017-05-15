@@ -6,7 +6,9 @@ import Vuex from 'vuex'
 import mutations from './mutation'
 Vue.use(Vuex)
 const state = {
-  navigationInfo: true
+  navigationInfo: true,
+  loginInfo: false,
+  total: false
 }
 
 const store = new Vuex.Store({

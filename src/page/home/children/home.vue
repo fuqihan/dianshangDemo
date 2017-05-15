@@ -60,7 +60,6 @@
           </div>
         </div>
       </div>
-
     </div>
     <shops></shops>
   </div>
@@ -70,7 +69,7 @@
   import { a, b, c, d, e, f } from '../../../../static/outImg'
   import swiper from '../../../components/swiper/swiper.vue'
   import countdown from '../../../components/countdown/countdown.vue'
-  import shops from './shopsList.vue'
+  import shops from '../../../components/shopList/shopsList.vue'
 
   const listTree = {
     1: ['家居', '家具', '家装', '厨具'],

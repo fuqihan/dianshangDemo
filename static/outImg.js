@@ -6,7 +6,7 @@ let d = require('./img/home/dd.jpg')
 let e = require('./img/home/ee.jpg')
 let f = require('./img/home/ff.jpg')
 let qr = require('./img/code/pr.jpg')
-let logo = require('./img/code/logo.png')
+let logo = require('./img/code/logo.jpg')
 
 
 // 导出图片

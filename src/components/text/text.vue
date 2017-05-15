@@ -1,65 +1,63 @@
 <template>
-  <div class="swiper-container">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide" v-for="str in listImg" :style="{ backgroundImage: 'url(' + str.url + ')' }"></div>
-    </div>
-    <div class="swiper-pagination swiper-pagination-white"></div>
-  </div>
+  <md-card>
+    <md-card-media>
+      <div class='item' style="width: 500px">
+        <div class='player'>
+          <video-player :options='playerOptions'
+                        @ready='playerReadied($event)'>
+          </video-player>
+        </div>
+      </div>
+    </md-card-media>
+  </md-card>
 </template>
 
 <script>
-  import Swiper from 'swiper'
-  import { a, b, c, d, e } from '../../../static/outImg'
-  import 'swiper/dist/css/swiper.min.css'
+  // resolution-switcher plugin
+  require('videojs-resolution-switcher')
+  require('videojs-resolution-switcher/lib/videojs-resolution-switcher.css')
   export default {
     data () {
       return {
-        listImg: [
-          {url: a}, {url: b}, {url: c}, {url: d}, {url: e}
-        ]
+        playerSources: [{
+          type: 'video/mp4',
+          src: 'http://7xkwa7.media1.z0.glb.clouddn.com/sample_video_H',
+          label: '1080P',
+          res: 1
+        }, {
+          type: 'video/mp4',
+          src: 'http://221.11.100.42/7xkwa7.media1.z0.glb.clouddn.com/sample_video_M?wsiphost=local',
+          label: '720P',
+          res: 2
+        }, {
+          type: 'video/mp4',
+          src: 'http://7xkwa7.media1.z0.glb.clouddn.com/sample_video_L',
+          label: '360P',
+          res: 3
+        }],
+        playerOptions: {
+          plugins: {
+            videoJsResolutionSwitcher: {
+              ui: true,
+              default: 3,
+              dynamicLabel: true
+            }
+          },
+          playbackRates: [0.7, 1, 1.3, 1.5, 1.7],
+          poster: '/static/images/author-3.jpg',
+          height: 360
+        }
       }
     },
-    mounted () {
-      console.log('mounted', this)
-      var swiper = new Swiper('.swiper-container', {
-        pagination: '.swiper-pagination',
-        longSwipesMs: 1000,
-        longSwipes: false,
-        paginationClickable: true,
-        loop: true,
-        speed: 600,
-        autoplay: 4000,
-        onTouchEnd: function () {
-          swiper.startAutoplay()
+    methods: {
+      playerReadied (player) {
+        if (player.updateSrc) {
+          player.updateSrc(this.playerSources)
+          player.on('resolutionchange', function () {
+            console.log('switch the source', player.src())
+          })
         }
-      })
+      }
     }
   }
 </script>
-
-<style lang="less">
-  .swiper-container {
-    width: 100%;
-    height: 10rem;
-    .swiper-wrapper {
-      width: 100%;
-      height: 100%;
-    }
-    .swiper-slide {
-      background-position: center;
-      background-size: cover;
-      width: 100%;
-      height: 100%;
-      img {
-        width: 100%;
-        height: 100%;
-      }
-    }
-    .swiper-pagination-bullet {
-      width:0.833rem;
-      height: 0.833rem;
-      display: inline-block;
-      background: #7c5e53;
-    }
-  }
-</style>
