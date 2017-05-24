@@ -12,14 +12,14 @@
         <div class="header-right">
           <router-link :to="{name: 'register'}">注册</router-link>
           <router-link :to="{name: 'login'}">登录</router-link>
-          <router-link :to="{name: 'index'}"><i class="iconfont icon-wodedingdan"
-                                                style="font-size: 10px; margin-right: 5px"></i>我的订单
+          <router-link :to="{name: 'personal'}"><i class="iconfont icon-wodedingdan"
+                                                style="font-size: 10px; margin-right: 5px"></i>个人中心
           </router-link>
           <router-link :to="{name: 'shopCart'}"><i class="iconfont icon-gouwuchekong"
                                                 style="font-size: 12px; margin-right: 5px; color: red"></i>购物车
           </router-link>
           <router-link :to="{name: 'index'}">客户服务</router-link>
-          <router-link :to="{name: 'index'}">商家管理</router-link>
+          <router-link :to="{name: 'businessmen'}">商家管理</router-link>
         </div>
       </el-col>
     </el-row>

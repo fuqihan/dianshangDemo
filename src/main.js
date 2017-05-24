@@ -8,11 +8,13 @@ import store from './store'
 import VueAxios from 'vue-axios'
 import ElementUI from 'element-ui'
 import VueVideoPlayer from 'vue-video-player'
+import VueQuillEditor from 'vue-quill-editor'
 import 'element-ui/lib/theme-default/index.css'
 
 Vue.use(VueAxios, axios)
 Vue.use(ElementUI)
 Vue.use(VueVideoPlayer)
+Vue.use(VueQuillEditor)
 
 Vue.config.productionTip = false
 

@@ -12,6 +12,10 @@ const register = r => require.ensure([], () => r(require('../page/register/regis
 const search = r => require.ensure([], () => r(require('../page/search/search.vue')), 'search')
 const shopShow = r => require.ensure([], () => r(require('../page/shopShow/shopShow.vue')), 'shopShow')
 const shopCart = r => require.ensure([], () => r(require('../page/shopCart/shopCart.vue')), 'shopCart')
+const personal = r => require.ensure([], () => r(require('../page/personal/personal.vue')), 'personal')
+const personalTab1 = r => require.ensure([], () => r(require('../page/personal/children/tab1.vue')), 'personal')
+const personalTab2 = r => require.ensure([], () => r(require('../page/personal/children/tab2.vue')), 'personal')
+const businessmen = r => require.ensure([], () => r(require('../page/businessmen/businessmen.vue')), 'businessmen')
 Vue.use(Router)
 
 const routes = [
@@ -47,6 +51,32 @@ const routes = [
         path: '/shopCart',
         name: 'shopCart',
         component: shopCart
+      },
+      {
+        path: '/personal',
+        name: 'personal',
+        component: personal,
+        children: [
+          {
+            path: '/',
+            redirect: '/personalTab1'
+          },
+          {
+            path: '/personalTab1',
+            name: 'personalTab1',
+            component: personalTab1
+          },
+          {
+            path: '/personalTab2',
+            name: 'personalTab2',
+            component: personalTab2
+          }
+        ]
+      },
+      {
+        path: '/businessmen',
+        name: 'businessmen',
+        component: businessmen
       }
     ]
   },

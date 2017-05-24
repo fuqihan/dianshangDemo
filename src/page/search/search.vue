@@ -1,15 +1,10 @@
 <template>
   <div class="search">
-    <div class="search-header">
-      <div class="search-header-top">
-       <span class="focus"><i class="iconfont icon-wodedingdan"
-                              style="font-size: 20px; margin-right: 5px"></i>搜索结果</span>
-      </div>
-      <div class="search-header-option">
-        <breadcrumb></breadcrumb>
-        <search-option></search-option>
-      </div>
-    </div>
+    <f-header :msg="header"></f-header>
+    <br>
+    面包屑
+    <br>
+    <search-option></search-option>
     <div class="search-shop">
       <div class="search-shop-sorting">
         <div class="search-shop-sorting-list" @click="sortingInfo(0)"
@@ -38,7 +33,9 @@
       </div>
       <div class="search-shop-list">
         <div v-for="item in 10">
-          <router-link :to="{name: 'shopShow'}"> <shopList></shopList></router-link>
+          <router-link :to="{name: 'shopShow'}">
+            <shopList></shopList>
+          </router-link>
         </div>
       </div>
     </div>
@@ -47,9 +44,9 @@
 
 <script>
   import searchOption from '../../components/searchOption/searchOption.vue'
-  import breadcrumb from '../../components/breadcrumbs/breadcrumbs.vue'
   import shopList from '../../components/shopList/shopsList.vue'
   import { sortingOne, sortingTwo, sortingThree, sortingFour } from '../../config/sortingInfo'
+  import fHeader from '../../components/header/header.vue'
 
   const sortingList = ['综合', '销量', '新品', '价格']
 
@@ -57,13 +54,14 @@
     data () {
       return {
         sortingInfoList: [true, false, false, false],
-        sortingList: sortingList
+        sortingList: sortingList,
+        header: '全部商品'
       }
     },
     components: {
       searchOption,
-      breadcrumb,
-      shopList
+      shopList,
+      fHeader
     },
     methods: {
       sortingInfo (index) {
@@ -90,23 +88,6 @@
   @import "../../style/my";
 
   .search {
-    .search-header {
-      .search-header-top {
-        height: 45px;
-        width: 100%;
-        border-bottom: 2px solid @index-ls-color;
-        .focus {
-          display: inline-block;
-          margin-left: @index-center-left-margin-left;
-          width: @index-center-left-width;
-          height: 100%;
-          color: white;
-          background: @index-ls-color;
-          .flex-center();
-        }
-      }
-
-    }
     .search-shop {
       margin: 10px auto;
       width: 90%;
