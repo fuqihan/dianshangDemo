@@ -15,10 +15,11 @@
 </script>
 
 <style>
-  body{
+  body {
     margin: 0;
     padding: 0;
   }
+
   * {
     font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
   }

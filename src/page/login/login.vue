@@ -12,11 +12,8 @@
         </div>
         <router-view></router-view>
         <div class="login-form-bottom">
-          <i class="iconfont icon-qq login-qq" style="font-size: 25px"></i>
           <span class="login-qq-span">QQ</span>
-          <i class="iconfont icon-weixin icon-weixin" style="font-size: 25px"></i>
           <span class="login-weixin-span">微信</span>
-          <i class="el-icon-arrow-right login-go-register"></i>
           <span class="login-go-register-span">立即注册</span>
         </div>
       </div>
@@ -130,18 +127,13 @@
           .login-qq-span {
             position: absolute;
             top: 13px;
-            left: 40px;
+            left: 20px;
             font-size: 16px;
-          }
-          .icon-weixin {
-            position: absolute;
-            top: 2px;
-            left: 70px;
           }
           .login-weixin-span {
             position: absolute;
             top: 10px;
-            left: 100px;
+            left: 75px;
             font-size: 16px;
           }
           .login-go-register {
@@ -152,7 +144,7 @@
           .login-go-register-span {
             position: absolute;
             top: 10px;
-            right: 10px;
+            right: 30px;
             font-size: 16px;
           }
         }

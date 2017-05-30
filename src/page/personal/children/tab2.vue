@@ -31,15 +31,13 @@
       }
     },
     mounted () {
-      var vm = this
-      var imgHandler = async function (image) {
-        vm.addImgRange = vm.editor.getSelection()
+      let imgHandler = (image) => {
         if (image) {
-          var fileInput = document.getElementById(vm.uniqueId)
+          let fileInput = document.getElementById(this.uniqueId)
           fileInput.click()
         }
       }
-      vm.editor.getModule('toolbar').addHandler('image', imgHandler)
+      this.editor.getModule('toolbar').addHandler('image', imgHandler)
     },
     computed: {
       editor () {

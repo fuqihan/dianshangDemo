@@ -9,12 +9,15 @@ import VueAxios from 'vue-axios'
 import ElementUI from 'element-ui'
 import VueVideoPlayer from 'vue-video-player'
 import VueQuillEditor from 'vue-quill-editor'
+import infiniteScroll from 'vue-infinite-scroll'
 import 'element-ui/lib/theme-default/index.css'
+import './images/icon/iconfont.css'
 
 Vue.use(VueAxios, axios)
 Vue.use(ElementUI)
 Vue.use(VueVideoPlayer)
 Vue.use(VueQuillEditor)
+Vue.use(infiniteScroll)
 
 Vue.config.productionTip = false
 

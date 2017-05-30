@@ -27,27 +27,22 @@
               <span>查看更多<i class="el-icon-arrow-right" style="font-size: 12px;margin-left: 5px"></i></span>
             </div>
           </td>
-          <td>
-            <div class="kill_shop"></div>
-          </td>
-          <td>
-            <div class="kill_shop"></div>
-          </td>
-          <td>
-            <div class="kill_shop"></div>
-          </td>
-          <td>
-            <div class="kill_shop"></div>
+          <td v-for="item in killShop">
+            <div class="kill_shop">
+              <div class="kill_shop-left">
+                <a href="#">{{item.name}}</a>
+                <span style="margin: 10px 0;color: red">￥{{item.killPrice}}</span>
+                <span>原价: {{item.price}}</span>
+              </div>
+              <div class="kill_shop-right">
+                <img src="" alt="" width="80" height="100">
+              </div>
+            </div>
           </td>
         </tr>
       </table>
     </div>
-    <!--品牌 团购 排行榜-->
-    <div class="ptp">
-      <div class="tree"></div>
-      <div class="tree" style="margin: 0 16px"></div>
-      <div class="tree"></div>
-    </div>
+
     <div class="offer">
       <div class="coupon">
         <div class="array">
@@ -60,8 +55,24 @@
           </div>
         </div>
       </div>
+      <div class="ofter-list" v-for="item in 5">
+        <img src="" alt="">
+        <a href="#">
+          立即领取
+          <i class="el-icon-arrow-right" style="font-size: 10px"></i>
+        </a>
+      </div>
     </div>
-    <shops></shops>
+    <div class="shop-lists" v-infinite-scroll="loadMore"
+         infinite-scroll-disabled="busy" infinite-scroll-distance="10">
+      <div v-for="item in num">
+        <shops></shops>
+      </div>
+    </div>
+    <div class="center-loading" v-loading.body="loading"
+         element-loading-text="拼命加载中">
+      {{loadingEnd}}
+    </div>
   </div>
 </template>
 
@@ -83,6 +94,29 @@
     9: ['食品', '酒类', '生鲜', '特产'],
     10: ['图书', '音像', '电子书']
   }
+  const killShop = [{
+    'name': '专业配送 货到付款,',
+    'killPrice': 12,
+    'price': 15,
+    'killImg': ''
+  }, {
+    'name': '专业配送 货到付款,',
+    'killPrice': 12,
+    'price': 15,
+    'killImg': ''
+  }, {
+    'name': '专业配送 货到付款,',
+    'killPrice': 12,
+    'price': 15,
+    'killImg': ''
+  }, {
+    'name': '专业配送 货到付款,',
+    'killPrice': 12,
+    'price': 15,
+    'killImg': ''
+  }]
+
+  const offerList = {}
   export default{
     data () {
       return {
@@ -91,13 +125,36 @@
           {url: a}, {url: b}, {url: c}, {url: d}, {url: e}, {url: f}
         ],
         message: '正在倒计时',
-        endTime: '2017-06-03 20:06:00'
+        endTime: '2017-06-03 20:06:00',
+        killShop: killShop,
+        offerList: offerList,
+        num: 20,
+        busy: false,
+        loading: false,
+        loadingEnd: ''
       }
     },
     components: {
       'f-swiper': swiper,
       countdown,
       shops
+    },
+    methods: {
+      loadMore: function () {
+        this.loading = true
+        this.busy = true
+        setTimeout(() => {
+          this.loading = false
+          this.num += 10
+        }, 2000)
+        if (this.num < 40) {
+          setTimeout(() => {
+            this.busy = false
+          }, 10000)
+        } else {
+          this.loadingEnd = '不能在拉了,已经到最底了'
+        }
+      }
     }
   }
 </script>
@@ -110,10 +167,12 @@
     width: 100%;
     padding: 0;
     margin: 0;
+    background: #f0f0f0;
     .top {
       width: 100%;
       height: 45px;
       font-size: 16px;
+      background: white;
       border-bottom: 2px solid @index-ls-color;
       display: flex;
       align-items: center;
@@ -173,16 +232,17 @@
       }
     }
     .seckill_list {
-      height: 100px;
+      margin-top: 10px;
+      height: 120px;
       overflow: hidden;
       table {
+        margin: 0 auto;
         tr {
           td {
             border: 0;
             .kill {
-              margin-left: @index-center-left-margin-left;
               width: @index-center-left-width;
-              height: 100px;
+              height: 120px;
               background: rgba(207, 34, 190, 0.5);
               display: flex;
               flex-direction: column;
@@ -191,31 +251,44 @@
             }
             .kill_shop {
               width: 198px;
-              height: 100px;
+              height: 120px;
+              margin: 0 10px;
+              background: white;
+              display: flex;
+              justify-content: flex-start;
+              .kill_shop-left {
+                width: 55%;
+                height: 100%;
+                margin-left: 5px;
+                display: flex;
+                flex-direction: column;
+                a {
+                  margin-top: 10px;
+                  text-decoration: none;
+                  color: black;
+                  font-size: 10px;
+                }
+              }
+              .kill_shop-right {
+                width: 45%;
+                height: 100%;
+                img {
+                  margin-top: 10px;
+                }
+              }
             }
           }
         }
       }
     }
-    .ptp {
-      width: 100%;
-      margin: 20px 0;
-      display: flex;
-      justify-content: center;
-      .tree {
-        width: 25%;
-        height: 450px;
-        background: red;
-      }
-    }
     .offer {
-      width: 80%;
+      width: 90%;
       margin: 20px auto;
       display: flex;
       justify-content: flex-start;
       .coupon {
         width: 190px;
-        height: 215px;
+        height: 200px;
         background: #ea3524;
         display: flex;
         flex-direction: column;
@@ -236,11 +309,41 @@
           }
         }
       }
+      .ofter-list {
+        flex: 1;
+        margin: 0 10px;
+        height: 200px;
+        background: white;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: space-between;
+        img {
+          width: 80%;
+          margin-top: 10px;
+          height: 160px;
+        }
+        a {
+          text-decoration: none;
+          color: #8c939d;
+        }
+      }
     }
-  }
-
-  span {
-    font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+    .shop-lists {
+      width: 82%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+    }
+    .center-loading {
+      width: 82%;
+      height: 100px;
+      margin: 0 auto;
+      font-size: 20px;
+      text-align: center;
+      line-height: 100px;
+    }
   }
 
   .time {

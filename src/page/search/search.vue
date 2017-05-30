@@ -1,9 +1,13 @@
 <template>
   <div class="search">
     <f-header :msg="header"></f-header>
-    <br>
-    面包屑
-    <br>
+    <div class="search-breadcrumb">
+      <el-breadcrumb separator="/">
+        <el-breadcrumb-item :to="{ path: '/index' }" style="font-size: 20px">首页</el-breadcrumb-item>
+        <el-breadcrumb-item style="font-size: 20px">搜索</el-breadcrumb-item>
+        <el-breadcrumb-item style="font-size: 20px">哈哈</el-breadcrumb-item>
+      </el-breadcrumb>
+    </div>
     <search-option></search-option>
     <div class="search-shop">
       <div class="search-shop-sorting">
@@ -88,6 +92,12 @@
   @import "../../style/my";
 
   .search {
+    .search-breadcrumb {
+      margin: 20px 0 0 80px;
+      width: 700px;
+      height: 50px;
+      font-size: 30px;
+    }
     .search-shop {
       margin: 10px auto;
       width: 90%;

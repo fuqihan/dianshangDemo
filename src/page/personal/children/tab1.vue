@@ -13,8 +13,9 @@
       </div>
     </div>
     <div class="personal-tab1-2">
-      <span class="personal-tab1-2-name">我的订单</span>
-      <a href="#" class="personal-tab1-2-a">查看所有订单</a>
+      <span class="personal-tab1-2-name" @click="ccc">我的订单</span>
+      <a href="#" class="personal-tab1-2-a">查看所有订单
+        <i class="el-icon-arrow-right" style="font-size: 12px"></i></a>
       <div class="personal-tab1-2-list">
         <div class="order-list" v-for="item in 4"></div>
       </div>
@@ -23,14 +24,26 @@
 </template>
 
 <script>
-  export default{}
+  import aa from '../../../config/api'
+  export default{
+    methods: {
+      async ccc () {
+        try {
+          let xx = await aa
+          console.log(xx)
+        } catch (err) {
+          console.log(123)
+        }
+      }
+    }
+  }
 </script>
 
 <style lang="less">
   .personal-tab1 {
     width: 100%;
     .personal-tab1-1 {
-      width: 60%;
+      width: 80%;
       height: 130px;
       background: white;
       position: relative;
@@ -59,28 +72,24 @@
       min-height: 500px;
       margin: 20px 0;
       background: white;
-      position: relative;
       .personal-tab1-2-name {
-        position: absolute;
-        top: 10px;
-        left: 10px;
+        float: left;
+        margin: 10px 10px;
       }
       .personal-tab1-2-a {
+        float: right;
+        margin: 10px 10px;
         color: #606060;
         text-decoration: none;
-        position: absolute;
-        top: 10px;
-        right: 10px;
       }
       .personal-tab1-2-list {
-        width: 96%;
-        position: absolute;
-        top: 50px;
-        left: 2%;
+        display: inline-block;
+        width: 100%;
         .order-list {
-          width: 96%;
-          height: 100px;
-          margin: 10px 2%;
+          width: 84%;
+          margin: 10px 8%;
+          height: 200px;
+          background: red;
         }
       }
     }

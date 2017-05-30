@@ -58,10 +58,6 @@
     <router-view></router-view>
     <!--底部-->
     <f-bottom></f-bottom>
-    <!--右部导航栏-->
-    <transition name="fade">
-      <navigation v-if="navigationInfo"></navigation>
-    </transition>
   </div>
 </template>
 
