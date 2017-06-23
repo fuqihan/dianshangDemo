@@ -2,26 +2,45 @@
   <div class="login-tab-2">
     <div class="login-tab-input">
       <i class="iconfont icon-zhanghu" style="font-size: 30px"></i>
-      <el-input v-model="input" placeholder="请输入内容" class="login-input"></el-input>
+      <el-input v-model="username" placeholder="请输入账号" class="login-input"></el-input>
     </div>
     <div class="login-tab-input">
       <i class="iconfont icon-mima" style="font-size: 30px"></i>
-      <el-input v-model="input" placeholder="请输入内容" class="login-input"></el-input>
+      <el-input v-model="psd" placeholder="请输入密码" class="login-input"></el-input>
     </div>
     <div class="login-forget-psd">
       <a href="#">忘记密码</a>
     </div>
-    <button>登录</button>
+    <button @click="loginIab2">登录</button>
   </div>
 </template>
 
 <script>
-  export default{}
+  import { postLogin } from '../../../config/api'
+  export default{
+    data () {
+      return {
+        username: '',
+        psd: ''
+      }
+    },
+    methods: {
+      async loginIab2 () {
+        try {
+          let aac = await postLogin(this.username, this.psd)
+          console.log(aac.data)
+        } catch (err) {
+          console.log(123)
+        }
+      }
+    }
+  }
 </script>
 
 <style lang="less">
   @import "../../../images/icon/iconfont.css";
   @import "../../../style/my";
+
   .login-tab-2 {
     width: 100%;
     display: flex;
@@ -34,7 +53,7 @@
       justify-content: center;
       align-items: center;
     }
-    .login-forget-psd  {
+    .login-forget-psd {
       width: 284px;
       height: 70px;
       margin: 0 auto;
@@ -65,6 +84,7 @@
     height: 30px;
     font-size: 14px;
   }
+
   i {
     width: 30px;
     height: 30px;

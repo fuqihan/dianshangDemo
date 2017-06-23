@@ -6,7 +6,11 @@
                               style="font-size: 20px; margin-right: 5px"></i>商品介绍</span>
       </div>
       <div class="shop-show-header-option">
-        <breadcrumb></breadcrumb>
+        <el-breadcrumb separator="/">
+          <el-breadcrumb-item :to="{ path: '/index' }" style="font-size: 20px">首页</el-breadcrumb-item>
+          <el-breadcrumb-item style="font-size: 20px">商品</el-breadcrumb-item>
+          <el-breadcrumb-item style="font-size: 20px">{{shopMsg.name}}</el-breadcrumb-item>
+        </el-breadcrumb>
       </div>
     </div>
     <div class="shop-show-intro">
@@ -31,21 +35,22 @@
             </tr>
           </table>
         </div>
-        <el-input-number class="shop-show-intro-center-num" v-model="num" @change="handleChange" :min="1" :max="10"></el-input-number>
+        <el-input-number class="shop-show-intro-center-num" v-model="num" @change="handleChange" :min="1"
+                         :max="10"></el-input-number>
         <button class="shop-btn" @click="aa">加入购物车</button>
       </div>
       <div class="shop-show-intro-right">
         <span>同类推荐</span>
-        <div class="shop-show-intro-right-img"  v-for="item in 4">
+        <div class="shop-show-intro-right-img" v-for="item in 4">
           <img src="" alt="" width="150" height="150">
         </div>
       </div>
     </div>
     <div class="shop-show-tab">
-     <div class="shop-show-tab-header">
-       <span>商品介绍</span>
-       <span>商品评论</span>
-     </div>
+      <div class="shop-show-tab-header">
+        <span>商品介绍</span>
+        <span>商品评论</span>
+      </div>
     </div>
   </div>
 </template>
@@ -91,7 +96,12 @@
           .flex-center();
         }
       }
-
+      .shop-show-header-option {
+        margin: 20px 0 0 80px;
+        width: 700px;
+        height: 50px;
+        font-size: 30px;
+      }
     }
     .shop-show-intro {
       margin: 10px auto;
@@ -160,7 +170,7 @@
       }
     }
     .shop-show-tab {
-     width: 90%;
+      width: 90%;
       margin: 20px auto;
     }
   }

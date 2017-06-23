@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="personal-tab1-2">
-      <span class="personal-tab1-2-name" @click="ccc">我的订单</span>
+      <span class="personal-tab1-2-name">我的订单</span>
       <a href="#" class="personal-tab1-2-a">查看所有订单
         <i class="el-icon-arrow-right" style="font-size: 12px"></i></a>
       <div class="personal-tab1-2-list">
@@ -24,19 +24,7 @@
 </template>
 
 <script>
-  import aa from '../../../config/api'
-  export default{
-    methods: {
-      async ccc () {
-        try {
-          let xx = await aa
-          console.log(xx)
-        } catch (err) {
-          console.log(123)
-        }
-      }
-    }
-  }
+  export default{}
 </script>
 
 <style lang="less">

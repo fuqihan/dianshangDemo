@@ -7,9 +7,8 @@
     <quill-editor v-model="content" ref="myQuillEditor">
     </quill-editor>
     <button @click="editorSub">提交</button>
-    <input style="display: none" :id="uniqueId" type="file" name="avator" multiple
-           accept="image/jpg,image/jpeg,image/png,image/gif" @change="uploadImg('uploadFormMulti')">
-    <!--style="display: none"-->
+    <!--<input style="display: none" :id="uniqueId" type="file" name="avator" multiple-->
+    <!--accept="image/jpg,image/jpeg,image/png,image/gif" @change="uploadImg('uploadFormMulti')">-->
   </div>
 </template>
 
@@ -18,8 +17,7 @@
     data () {
       return {
         content: '<h2>I am Example</h2>',
-        editorOption: {},
-        uniqueId: 'bbc'
+        editorOption: {}
       }
     },
     methods: {
@@ -29,15 +27,6 @@
       uploadImg: async function () {
         this.editor.insertEmbed(10, 'image', './static/img/pr.27bc9bb.jpg')
       }
-    },
-    mounted () {
-      let imgHandler = (image) => {
-        if (image) {
-          let fileInput = document.getElementById(this.uniqueId)
-          fileInput.click()
-        }
-      }
-      this.editor.getModule('toolbar').addHandler('image', imgHandler)
     },
     computed: {
       editor () {
