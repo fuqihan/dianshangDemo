@@ -15,7 +15,8 @@
     </div>
     <div class="shop-show-intro">
       <div class="shop-show-intro-left">
-        <img src="" alt="" width="350" height="449">
+        <!--<img src="" alt="" width="350" height="449">-->
+        <f-enlarge></f-enlarge>
         <div class="shop-show-intro-left-bottom">
           <img src="" alt="" width="50" height="64" v-for="item in 5">
         </div>
@@ -35,9 +36,9 @@
             </tr>
           </table>
         </div>
-        <el-input-number class="shop-show-intro-center-num" v-model="num" @change="handleChange" :min="1"
+        <el-input-number class="shop-show-intro-center-num" v-model="num"  :min="1"
                          :max="10"></el-input-number>
-        <button class="shop-btn" @click="aa">加入购物车</button>
+        <button class="shop-btn"  >加入购物车</button>
       </div>
       <div class="shop-show-intro-right">
         <span>同类推荐</span>
@@ -57,6 +58,7 @@
 
 <script>
   import breadcrumb from '../../components/breadcrumbs/breadcrumbs.vue'
+  import enlarge from '../../components/enlarge/enlarge.vue'
   const shopMsg = {
     'name': '美仑达 四川蒲江青见柑橘 5斤装 自营水果',
     'introduction': '【5月补维C 就选柑橘皇后“青见”！口感PK全球柑/桔/橙/柚】【“青见”桔橙：靓女（青见）的丑宝宝就是不知火】：汁多味美胜似丑柑丑橘不知火 似橙非橙 惊艳你的味蕾【供应香港的精选脐橙 3斤26.9！】',
@@ -70,7 +72,8 @@
       }
     },
     components: {
-      breadcrumb
+      breadcrumb,
+      'f-enlarge': enlarge
     }
   }
 </script>

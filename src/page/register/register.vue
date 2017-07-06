@@ -5,22 +5,26 @@
       <span>欢迎注册</span>
     </div>
     <div class="register-form">
-      <el-input placeholder="请输入内容" class="register-form-input">
+        <el-input placeholder="请输入账户名" class="register-form-input"
+                             v-model="name" @blur="nameBlur" >
         <template slot="prepend" class="register-form-label">用户名 :</template>
       </el-input>
-      <el-input placeholder="请输入内容" class="register-form-input">
+      <span class="inout-verification" :style="{color: infoColor1}">{{nameRe}}</span>
+      <el-input placeholder="请输入密码" class="register-form-input" v-model="psd">
         <template slot="prepend" class="register-form-label">设置密码 :</template>
       </el-input>
-      <el-input placeholder="请输入内容" class="register-form-input">
-        <template slot="prepend" class="register-form-label">确认密码 :</template>
+      <el-input placeholder="请在输入一遍密码" class="register-form-input" v-model="password" @blur="psdConfirm" >
+        <template slot="prepend" class="register-form-label" >确认密码 :</template>
       </el-input>
-      <el-input placeholder="请输入内容" class="register-form-input">
+      <span class="inout-verification" :style="{color: infoColor2}">{{psdCon}}</span>
+      <el-input placeholder="请输入电话"  class="register-form-input" v-model="tel" @blur="telConfirm">
         <template slot="prepend" class="register-form-label">电话 :</template>
       </el-input>
-      <el-input placeholder="请输入内容" class="register-form-input">
+      <span class="inout-verification" :style="{color: infoColor3}">{{telCon}}</span>
+      <el-input placeholder="暂未启用，不用输入" class="register-form-input">
         <template slot="prepend" class="register-form-label">验证码 :</template>
       </el-input>
-      <button>立即注册</button>
+      <button @click="open">立即注册</button>
     </div>
     <div class="register-bottom">
     <div class="three">
@@ -59,17 +63,104 @@
 
 <script>
   import { logo } from '../../../static/outImg'
-
+  import { nameRepeat, addUser } from '../../config/api'
   export default{
     data () {
       return {
-        logoImg: logo
+        logoImg: logo,
+        name: '',
+        nameRe: '',
+        infoName: false,
+        psd: '',
+        password: '',
+        infoPsd: false,
+        psdCon: '',
+        tel: '',
+        telCon: '',
+        infoTel: false,
+        infoColor1: 'red', // 用户名span颜色
+        infoColor2: 'red', // 密码验证span颜色
+        infoColor3: 'red' // 电话验证span颜色
+      }
+    },
+    methods: {
+      async nameBlur () {
+        try {
+          let aac = await nameRepeat(this.name)
+          if (aac.data) {
+            this.nameRe = '没有重复，可以使用'
+            this.infoColor1 = 'blue'
+            this.infoName = true
+          } else {
+            this.nameRe = '用户名重复'
+            this.infoColor1 = 'red'
+            this.infoName = false
+          }
+        } catch (err) {
+          this.nameRe = '网络不佳'
+          this.infoColor1 = 'red'
+          this.infoName = false
+        }
+      },
+      psdConfirm () {
+        if (this.psd === this.password) {
+          this.psdCon = '两次输入密码相同，请继续'
+          this.infoColor2 = 'blue'
+          this.infoPsd = true
+        } else {
+          this.psdCon = '两次输入密码不相同，请在输入一次'
+          this.infoColor2 = 'red'
+          this.infoPsd = false
+        }
+      },
+      telConfirm () {
+        let re = /^1\d{10}$/
+        if (re.test(this.tel)) {
+          this.telCon = '输入电话号码格式正确'
+          this.infoColor3 = 'blue'
+          this.infoTel = true
+        } else {
+          this.telCon = '输入电话号码格式不正确'
+          this.infoColor3 = 'red'
+          this.infoTel = false
+        }
+      },
+      async open () {
+        if (!this.name || !this.psd || !this.password || !this.tel || !this.infoName || !this.infoPsd || !this.infoTel) {
+          this.$alert('信息未输入完整', '标题名称', {
+            confirmButtonText: '确定',
+            callback: () => {
+              console.log(123)
+            }
+          })
+        } else {
+          let data = await addUser({
+            name: this.name,
+            password: this.password,
+            tel: this.tel
+          })
+          if (data) {
+            this.$alert('恭喜你，注册成功', '标题名称', {
+              confirmButtonText: '确定',
+              callback: () => {
+                console.log(123)
+              }
+            })
+          } else {
+            this.$alert('服务器错误', '标题名称', {
+              confirmButtonText: '确定',
+              callback: () => {
+                console.log(123)
+              }
+            })
+          }
+        }
       }
     }
   }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
   @import "../../style/my";
 
   .register {
@@ -94,6 +185,7 @@
     }
     .register-form {
       width: 100%;
+      background: #f0f0f0;
       display: flex;
       align-items: center;
       flex-direction: column;
@@ -138,5 +230,8 @@
       }
     }
   }
-
+   .inout-verification{
+     width: 460px;
+     font-size: 12px;
+   }
 </style>

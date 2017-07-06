@@ -12,7 +12,7 @@
       <div class="left">
         <div class="left-col" v-for="item in listTree">
           <span v-for="bb in item"><a href="#">{{bb}}</a> &nbsp</span>
-          <div class="content">{{item}}</div>
+          <!--<div class="content">{{item}}</div>-->
         </div>
       </div>
     </div>

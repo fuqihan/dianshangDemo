@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <div id="small" ref="small" @mouseover="smallMous" @mouseout="smallOut" @mousemove="smallmove">
-      <span id="float" ref="float"></span>
-      <img src="./2.jpg" width="360" height="360">
+  <div class="enlarge">
+    <div class="enlarge-small" ref="small" @mouseover="smallMous" @mouseout="smallOut" @mousemove="smallmove">
+      <span class="enlarge-float" ref="float"></span>
+      <img src="./2.jpg" width="350" height="449">
     </div>
     <div class="abc" ref="abc">
       <div class="text" ref="text"></div>
@@ -65,15 +65,15 @@
 </script>
 
 <style lang="less">
-  div {
+  .enlarge {
     * {
       margin: 0;
       padding: 0;
     }
 
-    #small {
-      width: 360px;
-      height: 360px;
+    .enlarge-small {
+      width: 350px;
+      height: 449px;
       overflow: hidden;
       margin-left: 10px;
       margin-top: 10px;
@@ -82,13 +82,13 @@
       border: 1px solid red;
     }
 
-    #small img {
+   .enlarge-small > img {
       position: absolute;
       top: 0;
       left: 0;
     }
 
-    #float {
+    .enlarge-float {
       display: block;
       width: 50px;
       height: 50px;
@@ -98,26 +98,25 @@
       position: absolute;
       display: none;
     }
-  }
-
-  .text {
-    background: url("./2.jpg");
-    width: 1000px;
-    height: 1000px;
-    background-size:  100% 100%;
-    position: absolute;
-    top: -200px;
-    left: 0;
-  }
-  .abc {
-    width: 400px;
-    height: 400px;
-    overflow: hidden;
-    margin-top: -380px;
-    margin-left: 420px;
-    position: relative;
-    display: none;
-    z-index: 99;
-    border: 1px solid blue;
+    .text {
+      background: url("./2.jpg");
+      width: 1000px;
+      height: 1000px;
+      background-size:  100% 100%;
+      position: absolute;
+      top: -200px;
+      left: 0;
+    }
+    .abc {
+      width: 400px;
+      height: 400px;
+      overflow: hidden;
+      margin-top: -380px;
+      margin-left: 420px;
+      position: relative;
+      display: none;
+      z-index: 99;
+      border: 1px solid blue;
+    }
   }
 </style>

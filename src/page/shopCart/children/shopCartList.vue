@@ -117,14 +117,18 @@
       numAll () {
         let aa = 0
         this.shopList.forEach((item, index) => {
-          aa += item.num
+            if(item.checkInfo){
+              aa += item.num
+            }
         })
         return aa
       },
       priceAll () {
         let aa = 0
         this.shopList.forEach((item, index) => {
-          aa += item.num * item.price
+          if(item.checkInfo){
+            aa += item.num * item.price
+          }
         })
         aa = aa.toFixed(2)
         return aa
