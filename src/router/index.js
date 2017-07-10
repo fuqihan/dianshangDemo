@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from '../store'
 /*
  懒加载路由
  */
@@ -16,6 +17,7 @@ const personal = r => require.ensure([], () => r(require('../page/personal/perso
 const personalTab1 = r => require.ensure([], () => r(require('../page/personal/children/tab1.vue')), 'personal')
 const personalTab2 = r => require.ensure([], () => r(require('../page/personal/children/tab2.vue')), 'personal')
 const businessmen = r => require.ensure([], () => r(require('../page/businessmen/businessmen.vue')), 'businessmen')
+const routerAlert = r => require.ensure([], () => r(require('../routerAlert.vue')), 'home')
 Vue.use(Router)
 
 const routes = [
@@ -105,12 +107,27 @@ const routes = [
     path: '/register',
     name: 'register',
     component: register
+  },
+  {
+    path: '/routerAlert',
+    name: 'routerAlert',
+    component: routerAlert
   }
 ]
+
 
 const router = new Router({
   linkActiveClass: 'active',
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if(!store.state.loginInfo) {
+    if(to.name==='personal' || to.name==='shopCart'){
+      next({path: '/routerAlert'})
+    }
+  }
+  next()
 })
 
 export default router

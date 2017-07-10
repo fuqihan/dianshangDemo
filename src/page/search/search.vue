@@ -5,7 +5,7 @@
       <el-breadcrumb separator="/">
         <el-breadcrumb-item :to="{ path: '/index' }" style="font-size: 20px">首页</el-breadcrumb-item>
         <el-breadcrumb-item style="font-size: 20px">搜索</el-breadcrumb-item>
-        <el-breadcrumb-item style="font-size: 20px">哈哈</el-breadcrumb-item>
+        <el-breadcrumb-item style="font-size: 20px">{{search}}</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <search-option></search-option>
@@ -36,9 +36,9 @@
         </div>
       </div>
       <div class="search-shop-list">
-        <div v-for="item in 10">
+        <div v-for="item in shopData">
           <router-link :to="{name: 'shopShow'}">
-            <shopList></shopList>
+            <shopList :shopData="item"></shopList>
           </router-link>
         </div>
       </div>
@@ -53,13 +53,20 @@
   import fHeader from '../../components/header/header.vue'
 
   const sortingList = ['综合', '销量', '新品', '价格']
-
+  const shopData = [
+    {
+      shopUrl: 'https://img14.360buyimg.com/jdcms/s220x220_jfs/t2359/227/2070719850/187826/d2d8d64e/568c7d12N18c9df53.jpg!q90.webp',
+      shopName: '上海绿源(SHLY) 节能灯 E27 灯泡 白炽灯色 U型 3U18W 色温2700K 黄光',
+      shopPrice: 12.90
+    }
+  ]
   export default{
     data () {
       return {
         sortingInfoList: [true, false, false, false],
         sortingList: sortingList,
-        header: '全部商品'
+        header: '全部商品',
+        shopData: shopData
       }
     },
     components: {
@@ -83,6 +90,11 @@
             this.sortingInfoList = sortingFour
             break
         }
+      }
+    },
+    computed: {
+      search () {
+          return this.$store.state.search
       }
     }
   }

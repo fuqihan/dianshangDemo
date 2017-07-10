@@ -1,13 +1,28 @@
 <template>
     <div class="shop">
-      <img src="" alt="" width="96%" height="80%">
-      <a href="">assfdffgfhfhfd</a>
-      <span>￥12</span>
+      <img :src="shop.shopUrl" alt="" width="96%" height="65%">
+      <a href="">{{shop.shopName}}</a>
+      <span>￥{{shop.shopPrice}}</span>
     </div>
 </template>
 
 <script>
-export default{}
+export default{
+  props: ['shopData'],
+  computed: {
+    shop () {
+        if(this.$props.shopData){
+            return this.$props.shopData
+        }else {
+            return {
+              shopUrl: '',
+              shopName: '',
+              shopPrice: ''
+            }
+        }
+    }
+  }
+}
 </script>
 
 <style lang="less">
@@ -18,16 +33,23 @@ export default{}
     background: white;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     flex-direction: column;
     img{
-      margin-top: 5px;
+      padding: 1px;
     }
     a {
       text-decoration: none;
       color: black;
+      font-size: 14px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
     }
     span {
       color: red;
+      font-size: 18px;
     }
   }
 </style>

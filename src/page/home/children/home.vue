@@ -56,20 +56,18 @@
         </div>
       </div>
       <div class="ofter-list" v-for="item in 5">
-        <img src="" alt="">
-        <a href="#">
-          立即领取
-          <i class="el-icon-arrow-right" style="font-size: 10px"></i>
-        </a>
+        <img src="./66bOOOPIC37_1024.jpg" alt="">
       </div>
     </div>
     <div class="shop-lists" v-infinite-scroll="loadMore"
          infinite-scroll-disabled="busy" infinite-scroll-distance="10">
       <div v-for="item in num">
-        <shops></shops>
+        <router-link :to="{name: 'shopShow'}">
+        <shops :shopData="shopData[item]"></shops>
+        </router-link>
       </div>
     </div>
-    <div class="center-loading" v-loading.body="loading"
+    <div class="center-loading"
          element-loading-text="拼命加载中">
       {{loadingEnd}}
     </div>
@@ -81,6 +79,7 @@
   import swiper from '../../../components/swiper/swiper.vue'
   import countdown from '../../../components/countdown/countdown.vue'
   import shops from '../../../components/shopList/shopsList.vue'
+  import {findShops} from '../../../config/api'
 
   const listTree = {
     1: ['家居', '家具', '家装', '厨具'],
@@ -115,7 +114,6 @@
     'price': 15,
     'killImg': ''
   }]
-
   const offerList = {}
   export default{
     data () {
@@ -125,13 +123,14 @@
           {url: a}, {url: b}, {url: c}, {url: d}, {url: e}, {url: f}
         ],
         message: '正在倒计时',
-        endTime: '2017-06-03 20:06:00',
+        endTime: '2017-10-03 20:06:00',
         killShop: killShop,
         offerList: offerList,
         num: 20,
         busy: false,
         loading: false,
-        loadingEnd: ''
+        loadingEnd: '加载中。。。。',
+        shopData: ''
       }
     },
     components: {
@@ -150,12 +149,17 @@
         if (this.num < 40) {
           setTimeout(() => {
             this.busy = false
-          }, 10000)
+          }, 5000)
         } else {
           this.loadingEnd = '不能在拉了,已经到最底了'
         }
       }
-    }
+    },
+    created () {
+          findShops().then((data) => {
+            this.shopData = data.data;
+          })
+      }
   }
 </script>
 
@@ -319,9 +323,8 @@
         flex-direction: column;
         justify-content: space-between;
         img {
-          width: 80%;
-          margin-top: 10px;
-          height: 160px;
+          width: 100%;
+          height: 100%;
         }
         a {
           text-decoration: none;
@@ -330,10 +333,10 @@
       }
     }
     .shop-lists {
-      width: 82%;
+      width: 100%;
       margin: 0 auto;
       display: flex;
-      justify-content: flex-start;
+      justify-content: center;
       flex-wrap: wrap;
     }
     .center-loading {

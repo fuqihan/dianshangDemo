@@ -10,8 +10,14 @@
       </el-col>
       <el-col :span="20">
         <div class="header-right">
-          <router-link :to="{name: 'register'}">注册</router-link>
-          <router-link :to="{name: 'login'}">登录</router-link>
+          <div v-if="!loginInfo">
+            <router-link :to="{name: 'register'}">注册</router-link>
+            <router-link :to="{name: 'login'}">登录</router-link>
+          </div>
+          <div v-if="loginInfo">
+            <span>欢迎: {{loginName}}</span>
+            <span @click="loginOut">退出</span>
+          </div>
           <router-link :to="{name: 'personal'}"><i class="iconfont icon-wodedingdan"
                                                 style="font-size: 10px; margin-right: 5px"></i>个人中心
           </router-link>
@@ -42,11 +48,11 @@
           <!--<el-input v-model="input" placeholder="请输入内容" class="search-input"></el-input>-->
           <el-autocomplete
             class="search-input"
-            v-model="input"
+            v-model="search"
             :fetch-suggestions="querySearchAsync"
             placeholder="请输入内容"
           ></el-autocomplete>
-          <button class="search-btn" @click="aa">搜索</button>
+          <button class="search-btn" @click="onSearch">搜索</button>
         </div>
       </el-col>
       <el-col :span="6">
@@ -69,7 +75,7 @@
     data () {
       return {
         restaurants: [],
-        input: '',
+        search: '',
         qr: qr,
         logoImg: logo
       }
@@ -84,9 +90,9 @@
           {'value': 'bbbbb'}
         ]
       },
-      aa () {
-//        this.$store.commit('NAVIGATION_INFO_FALSE')
-        this.$router.push({name: 'search'})
+      onSearch () {
+        this.$store.commit('SEARCH_CM',this.search)
+        this.$router.push({name: 'search', params: {data: this.search}})
       },
       querySearchAsync (queryString, cb) {
         var restaurants = this.restaurants
@@ -101,11 +107,21 @@
         return (state) => {
           return (state.value.indexOf(queryString.toLowerCase()) === 0)
         }
+      },
+      loginOut () {
+        window.localStorage["dianshangToken"] = false
+          this.$store.commit('LOGIN_INFO_FALSE')
       }
     },
     computed: {
       navigationInfo () {
         return this.$store.state.navigationInfo
+      },
+      loginInfo () {
+          return this.$store.state.loginInfo
+      },
+      loginName () {
+          return window.localStorage["dianshangName"]
       }
     },
     components: {
@@ -143,6 +159,11 @@
       text-decoration: none;
       margin-left: 25px;
       font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+    }
+    span{
+      font-size: 12px;
+      color: rgba(43, 43, 43, 0.8);
+      margin-left: 25px;
     }
   }
 

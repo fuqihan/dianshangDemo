@@ -14,7 +14,7 @@
         <div class="login-form-bottom">
           <span class="login-qq-span">QQ</span>
           <span class="login-weixin-span">微信</span>
-          <span class="login-go-register-span">立即注册</span>
+          <span class="login-go-register-span"><router-link :to="{name: 'register'}" class="login-tab">立即注册</router-link></span>
         </div>
       </div>
     </div>
@@ -146,6 +146,9 @@
             top: 10px;
             right: 30px;
             font-size: 16px;
+            a {
+              color: #000;
+            }
           }
         }
       }

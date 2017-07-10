@@ -6,17 +6,18 @@
     </div>
     <div class="login-tab-input">
       <i class="iconfont icon-mima" style="font-size: 30px"></i>
-      <el-input v-model="psd" placeholder="请输入密码" class="login-input"></el-input>
+      <el-input type="password" v-model="psd" placeholder="请输入密码" class="login-input"></el-input>
     </div>
     <div class="login-forget-psd">
       <a href="#">忘记密码</a>
     </div>
-    <button @click="loginIab2">登录</button>
+    <button @click="login">登录</button>
   </div>
 </template>
 
 <script>
   import { postLogin } from '../../../config/api'
+  import { addToken } from '../../../config/ls'
   export default{
     data () {
       return {
@@ -25,13 +26,34 @@
       }
     },
     methods: {
-      async loginIab2 () {
-        try {
-          let aac = await postLogin(this.username, this.psd)
-          console.log(aac.data)
-        } catch (err) {
-          console.log(123)
-        }
+      async login () {
+          if (this.username && this.psd) {
+            let data = await postLogin(this.username, this.psd)
+            console.log(data)
+            if(data.data.info) {
+              this.$alert('恭喜你登陆成功！', '登陆', {
+                confirmButtonText: '确定',
+                callback: action => {
+                  addToken({
+                    token: data.data.token,
+                    name: data.data.name
+                  })
+                  this.$store.commit('LOGIN_INFO_TRUE')
+                  this.$router.push({name: "index"})
+                }
+              });
+            } else {
+              this.$alert('你的账号名或密码输入不符！', '登陆', {
+                confirmButtonText: '确定',
+                callback: action => {}
+              });
+            }
+          }else {
+            this.$alert('你的输入未完成，请继续输入！', '登陆', {
+              confirmButtonText: '确定',
+              callback: action => {}
+            });
+          }
       }
     }
   }
@@ -45,6 +67,11 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    i {
+      width: 30px;
+      height: 30px;
+      margin-top: 5px;
+    }
     .login-tab-input {
       width: 100%;
       height: 30px;
@@ -85,9 +112,4 @@
     font-size: 14px;
   }
 
-  i {
-    width: 30px;
-    height: 30px;
-    margin-top: 5px;
-  }
 </style>

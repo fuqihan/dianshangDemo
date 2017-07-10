@@ -7,8 +7,9 @@ import mutations from './mutation'
 Vue.use(Vuex)
 const state = {
   navigationInfo: true,
-  loginInfo: false,
-  total: false
+  loginInfo: false,  // 是否登陆
+  total: false,
+  search: ''    // 搜索框
 }
 
 const store = new Vuex.Store({
