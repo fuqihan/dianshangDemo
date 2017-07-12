@@ -10,14 +10,14 @@
       </el-col>
       <el-col :span="20">
         <div class="header-right">
-          <div v-if="!loginInfo">
+          <template v-if="!loginInfo">
             <router-link :to="{name: 'register'}">注册</router-link>
             <router-link :to="{name: 'login'}">登录</router-link>
-          </div>
-          <div v-if="loginInfo">
+          </template>
+          <template v-if="loginInfo">
             <span>欢迎: {{loginName}}</span>
             <span @click="loginOut">退出</span>
-          </div>
+          </template>
           <router-link :to="{name: 'personal'}"><i class="iconfont icon-wodedingdan"
                                                 style="font-size: 10px; margin-right: 5px"></i>个人中心
           </router-link>
