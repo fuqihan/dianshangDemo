@@ -9,11 +9,11 @@
                              v-model="name" @blur="nameBlur" >
         <template slot="prepend" class="register-form-label">用户名 :</template>
       </el-input>
-      <span class="inout-verification" :style="{color: infoColor1}">{{nameRe}}</span>
-      <el-input placeholder="请输入密码" class="register-form-input" v-model="psd">
+      <span class="inout-verification"  :style="{color: infoColor1}">{{nameRe}}</span>
+      <el-input placeholder="请输入密码" type="password" class="register-form-input" v-model="psd">
         <template slot="prepend" class="register-form-label">设置密码 :</template>
       </el-input>
-      <el-input placeholder="请在输入一遍密码" class="register-form-input" v-model="password" @blur="psdConfirm" >
+      <el-input placeholder="请在输入一遍密码" type="password" class="register-form-input" v-model="password" @blur="psdConfirm" >
         <template slot="prepend" class="register-form-label" >确认密码 :</template>
       </el-input>
       <span class="inout-verification" :style="{color: infoColor2}">{{psdCon}}</span>
@@ -64,6 +64,7 @@
 <script>
   import { logo } from '../../../static/outImg'
   import { nameRepeat, addUser } from '../../config/api'
+  import { addToken } from '../../config/ls'
   export default{
     data () {
       return {
@@ -87,7 +88,7 @@
       async nameBlur () {
         try {
           let aac = await nameRepeat(this.name)
-          if (aac.data) {
+          if (!aac.data && this.name) {
             this.nameRe = '没有重复，可以使用'
             this.infoColor1 = 'blue'
             this.infoName = true
@@ -139,21 +140,23 @@
             password: this.password,
             tel: this.tel
           })
-          if (data) {
-            this.$alert('恭喜你，注册成功', '标题名称', {
-              confirmButtonText: '确定',
-              callback: () => {
-                console.log(123)
-              }
-            })
-          } else {
-            this.$alert('服务器错误', '标题名称', {
-              confirmButtonText: '确定',
-              callback: () => {
-                console.log(123)
-              }
-            })
-          }
+          console.log(data.data)
+
+          data.data?this.$alert('恭喜你，注册成功', '标题名称', {
+            confirmButtonText: '确定',
+            callback: () => {
+              addToken({
+                token: data.data.token,
+                name: data.data.name
+              })
+              this.$store.commit('LOGIN_INFO_TRUE')
+              this.$router.push({name: "index"})
+            }
+          }) : this.$alert('服务器错误', '标题名称', {
+            confirmButtonText: '确定',
+            callback: () => {}
+          })
+
         }
       }
     }

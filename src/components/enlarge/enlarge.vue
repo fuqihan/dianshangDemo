@@ -1,12 +1,13 @@
 <template>
   <div class="enlarge">
-    <div class="enlarge-small" ref="small" @mouseover="smallMous" @mouseout="smallOut" @mousemove="smallmove">
-      <span class="enlarge-float" ref="float"></span>
-      <img src="./2.jpg" width="350" height="449">
+    <!--<div class="enlarge-small" ref="small" @mouseover="smallMous" @mouseout="smallOut" @mousemove="smallmove">-->
+      <div class="enlarge-small">
+      <!--<span class="enlarge-float" ref="float"></span>-->
+      <img :src="img" width="350" height="449">
     </div>
-    <div class="abc" ref="abc">
-      <div class="text" ref="text"></div>
-    </div>
+    <!--<div class="abc" ref="abc">-->
+      <!--<div class="text" :style="{ background: textUrl }" ref="text"></div>-->
+    <!--</div>-->
   </div>
 </template>
 
@@ -22,6 +23,7 @@
         abc: ''
       }
     },
+    props:['img'],
     methods: {
       smallMous () {
         this.oFloat.style.display = 'block'
@@ -60,6 +62,12 @@
       this.oFloat = this.$refs.float
       this.text = this.$refs.text
       this.abc = this.$refs.abc
+    },
+    computed: {
+      textUrl () {
+        let url = "url('"+ this.$props.img + "')"
+        return url
+      }
     }
   }
 </script>
@@ -99,7 +107,6 @@
       display: none;
     }
     .text {
-      background: url("./2.jpg");
       width: 1000px;
       height: 1000px;
       background-size:  100% 100%;

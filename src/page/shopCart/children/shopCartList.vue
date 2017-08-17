@@ -27,7 +27,7 @@
         </div>
         <div class="cart-shop-list-row-col cart-shop-list-row-col-4">4.00</div>
         <div class="cart-shop-list-row-col cart-shop-list-row-col-5">
-          <el-input-number v-model="item.num" @change="handleChange" :min="1" :max="10"></el-input-number>
+          <el-input-number v-model="item.num" :min="1" :max="10"></el-input-number>
         </div>
         <div class="cart-shop-list-row-col cart-shop-list-row-col-6">
           <span>删除</span>
@@ -53,43 +53,10 @@
 
 <script>
   import fCheckbox from '../../../components/chenkbox/fChenkbox.vue'
-  const shopList = [{
-    'id': 1,
-    'checkInfo': false,
-    'shopImg': '',
-    'name': 'aaaaaaaaaaaaaaaaaaaaa',
-    'msg': 'aaaaaaaaaaaaaa',
-    'style': 'bbbccbb',
-    'price': 15,
-    'num': 1
-  }, {
-    'id': 1,
-    'checkInfo': false,
-    'shopImg': '',
-    'name': 'aaaaaaaaaaaaaaaaaaaaa',
-    'msg': 'aaaaaaaaaaaaaa',
-    'style': 'bbccbbb',
-    'price': 15,
-    'num': 1
-  }, {
-    'id': 1,
-    'checkInfo': false,
-    'shopImg': '',
-    'name': 'aaaaaaaaaaaaaaaaaaaaa',
-    'msg': 'aaaaaaaaaaaaaa',
-    'style': 'bbbbb',
-    'price': 15,
-    'num': 1
-  }]
 
   export default{
     components: {
       fCheckbox
-    },
-    data () {
-      return {
-        shopList: shopList
-      }
     },
     methods: {
       isTotal () {
@@ -132,6 +99,9 @@
         })
         aa = aa.toFixed(2)
         return aa
+      },
+      shopList () {
+        return this.$store.state.cart
       }
     }
   }

@@ -3,12 +3,12 @@
  */
 import axios from 'axios'
 
+// const url = 'http://localhost:3000/'
 const url = 'http://localhost:3000/'
-// const url = 'http://120.25.240.196:3000/'
 
 /*
 * 用户模块    用户模块    用户模块
-* */
+*/
 
 /*
 * 提交登录信息

@@ -9,7 +9,8 @@ const state = {
   navigationInfo: true,
   loginInfo: false,  // 是否登陆
   total: false,
-  search: ''    // 搜索框
+  search: '',   // 搜索框
+  cart: []     //购物车
 }
 
 const store = new Vuex.Store({

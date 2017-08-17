@@ -1,6 +1,6 @@
 <template>
     <div class="shop">
-      <img :src="shop.shopUrl" alt="" width="96%" height="65%">
+      <img :src="shop.shopUrl" alt="" width="96%" height="65%" @click="onShopIng">
       <a href="">{{shop.shopName}}</a>
       <span>￥{{shop.shopPrice}}</span>
     </div>
@@ -20,6 +20,12 @@ export default{
               shopPrice: ''
             }
         }
+    }
+  },
+  methods: {
+    onShopIng () {
+      this.$router.push({name: "shopShow",params: this.$props.shopData})
+      console.log(this.$props.shopData)
     }
   }
 }

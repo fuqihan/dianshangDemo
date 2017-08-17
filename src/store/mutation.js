@@ -9,7 +9,8 @@ import {
   CART_INFO_TRUE,
   SEARCH_CM,
   LOGIN_INFO_TRUE,
-  LOGIN_INFO_FALSE
+  LOGIN_INFO_FALSE,
+  CART_PUSH
 } from './mutation-types'
 export default {
   [NAVIGATION_INFO_TRUE] (state) {
@@ -35,5 +36,8 @@ export default {
   },
   [LOGIN_INFO_FALSE] (state) {
     state.loginInfo = false
+  },
+  [CART_PUSH] (state,data) {
+    state.cart.push(data)
   }
 }

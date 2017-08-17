@@ -62,9 +62,9 @@
     <div class="shop-lists" v-infinite-scroll="loadMore"
          infinite-scroll-disabled="busy" infinite-scroll-distance="10">
       <div v-for="item in num">
-        <router-link :to="{name: 'shopShow'}">
+
         <shops :shopData="shopData[item]"></shops>
-        </router-link>
+
       </div>
     </div>
     <div class="center-loading"

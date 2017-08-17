@@ -8,7 +8,7 @@
         <el-breadcrumb-item style="font-size: 20px">{{search}}</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
-    <search-option></search-option>
+    <!--<search-option></search-option>-->
     <div class="search-shop">
       <div class="search-shop-sorting">
         <div class="search-shop-sorting-list" @click="sortingInfo(0)"
@@ -65,7 +65,7 @@
       return {
         sortingInfoList: [true, false, false, false],
         sortingList: sortingList,
-        header: '全部商品',
+        header: '搜索',
         shopData: shopData
       }
     },

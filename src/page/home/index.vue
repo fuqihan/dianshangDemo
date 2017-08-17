@@ -25,7 +25,7 @@
                                                 style="font-size: 12px; margin-right: 5px; color: red"></i>购物车
           </router-link>
           <router-link :to="{name: 'index'}">客户服务</router-link>
-          <router-link :to="{name: 'businessmen'}">商家管理</router-link>
+          <router-link :to="{name: 'businessmen'}">在线帮助</router-link>
         </div>
       </el-col>
     </el-row>
@@ -52,7 +52,7 @@
             :fetch-suggestions="querySearchAsync"
             placeholder="请输入内容"
           ></el-autocomplete>
-          <button class="search-btn" @click="onSearch">搜索</button>
+          <button class="search-btn" @click="onSearch" @keyup.enter="onSearch">搜索</button>
         </div>
       </el-col>
       <el-col :span="6">

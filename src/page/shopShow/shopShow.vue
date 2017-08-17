@@ -9,26 +9,26 @@
         <el-breadcrumb separator="/">
           <el-breadcrumb-item :to="{ path: '/index' }" style="font-size: 20px">首页</el-breadcrumb-item>
           <el-breadcrumb-item style="font-size: 20px">商品</el-breadcrumb-item>
-          <el-breadcrumb-item style="font-size: 20px">{{shopMsg.name}}</el-breadcrumb-item>
+          <el-breadcrumb-item style="font-size: 20px">{{$route.params.shopName}}</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
     </div>
     <div class="shop-show-intro">
       <div class="shop-show-intro-left">
         <!--<img src="" alt="" width="350" height="449">-->
-        <f-enlarge></f-enlarge>
+        <f-enlarge :img="$route.params.shopUrl"></f-enlarge>
         <div class="shop-show-intro-left-bottom">
           <img src="" alt="" width="50" height="64" v-for="item in 5">
         </div>
       </div>
       <div class="shop-show-intro-center">
-        <span>{{shopMsg.name}}</span>
+        <span>{{$route.params.shopName}}</span>
         <p class="shop-show-intro-center-introduction">{{shopMsg.introduction}}</p>
         <div class="shop-show-intro-center-price-wrap">
           <table>
             <tr>
               <td class="shop-table-left">价格</td>
-              <td class="shop-table-right">￥{{shopMsg.price}}</td>
+              <td class="shop-table-right">￥{{$route.params.shopPrice}}</td>
             </tr>
             <tr>
               <td class="shop-table-left">促销</td>
@@ -38,7 +38,7 @@
         </div>
         <el-input-number class="shop-show-intro-center-num" v-model="num"  :min="1"
                          :max="10"></el-input-number>
-        <button class="shop-btn"  >加入购物车</button>
+        <button class="shop-btn" @click="onshopBtn"  >加入购物车</button>
       </div>
       <div class="shop-show-intro-right">
         <span>同类推荐</span>
@@ -71,6 +71,23 @@
         num: 1
       }
     },
+    methods: {
+      onshopBtn () {
+        let data = {
+          'id': this.$route.params._id,
+          'checkInfo': false,
+          'shopImg': this.$route.params.shopUrl,
+          'name': this.$route.params.shopName,
+          'msg': 'aaaaaaaaaaaaaa',
+          'style': 'bbbccbb',
+          'price': this.$route.params.shopPrice,
+          'num': this.num
+        }
+        this.$store.commit("CART_PUSH",data)
+//        console.log('cart====='+this.$store.state.cart[0].num)
+        this.$router.push({name: 'shopCart'})
+      }
+    },
     components: {
       breadcrumb,
       'f-enlarge': enlarge
@@ -101,7 +118,7 @@
       }
       .shop-show-header-option {
         margin: 20px 0 0 80px;
-        width: 700px;
+        width: 100%;
         height: 50px;
         font-size: 30px;
       }

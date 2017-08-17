@@ -1,8 +1,8 @@
 <template>
   <div class="shop-cart">
     <f-header :msg="header"></f-header>
-    <login v-if="loginInfo"></login>
-    <shop-cart-list v-if="!loginInfo"></shop-cart-list>
+    <login v-if="!loginInfo"></login>
+    <shop-cart-list v-if="loginInfo"></shop-cart-list>
   </div>
 </template>
 
