@@ -19,7 +19,7 @@
 
 ——权限处理   router.beforeEach与vuex的结合（在app.vue时created里进行读取本地token请求服务器判断是否登陆过，bug
 是beforeEach比请求的数据快一步触发，所以第一次进入的时候
-loginInfo是false，有什么办法可以说一下，谢谢）
+loginInfo是false(已解决，使用beforeCreate,该生命周期比router的beforeEach先执行)
 
 ——主页  使用第三方指令实现了上啦刷新
 
